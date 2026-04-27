@@ -50,7 +50,7 @@ const products = [
     whatsappText: "Hola, me interesa la Cámara de retroceso HD",
   },
   {
-    name: "Radio multimedia Android 10"",
+    name: "Radio multimedia Android 10\",
     price: "Gs. 1.450.000",
     oldPrice: "Gs. 1.650.000",
     category: "Audio y multimedia",
