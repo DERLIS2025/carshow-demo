@@ -51,7 +51,7 @@ const featuredProducts = [
     whatsappText: "Hola RD AUTOREPUESTO, consulto por Amortiguador KYB Excel-G Delantero",
   },
   {
-    name: "Llanta Aleación 17" Sport Racing",
+    name: "Llanta Aleación 17 pulgadas Sport Racing",
     price: "Gs. 1.850.000",
     category: "Llantas",
     badge: "Nuevo",
