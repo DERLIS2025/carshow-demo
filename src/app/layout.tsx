@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/components/CartProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "CAR SHOW Equipamientos | Accesorios automotrices en Paraguay",
+  title: "RD AUTOREPUESTO | Repuestos automotrices en Paraguay",
   description:
-    "Demo eCommerce premium para CAR SHOW Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
+    "RD AUTOREPUESTO: repuestos, accesorios y soluciones automotrices en Paraguay. Envíos a todo el país.",
 };
 
 export default function RootLayout({
@@ -30,7 +31,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col">
-        {children}
+        <CartProvider>
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
