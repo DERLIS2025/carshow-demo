@@ -15,14 +15,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "CAR SHOW Equipamientos | Accesorios automotrices en Paraguay",
-    template: "%s | CAR SHOW Equipamientos",
+    default: "RD Equipamientos | Accesorios automotrices en Paraguay",
+    template: "%s |RD Equipamientos",
   },
   description:
-    "Demo eCommerce premium para CAR SHOW Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
+    "Demo eCommerce premium para RD Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
   keywords: [
-    "CAR SHOW Paraguay",
-    "CAR SHOW Equipamientos",
+    "RD Paraguay",
+    "RD Equipamientos",
     "accesorios automotrices Paraguay",
     "equipamientos automotrices Paraguay",
     "luces LED para autos",
@@ -31,12 +31,12 @@ export const metadata: Metadata = {
     "sensores de estacionamiento",
     "accesorios interiores para autos",
     "accesorios exteriores para autos",
-    "sorteos CAR SHOW",
+    "sorteos RD",
     "tienda automotriz Paraguay",
   ],
-  authors: [{ name: "CAR SHOW Equipamientos" }],
-  creator: "CAR SHOW Equipamientos",
-  publisher: "CAR SHOW Equipamientos",
+  authors: [{ name: "RD Equipamientos" }],
+  creator: "RD Equipamientos",
+  publisher: "RD Equipamientos",
   category: "automotive",
   robots: {
     index: true,
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_PY",
     url: "https://autorepuestocompy.vercel.app",
-    siteName: "CAR SHOW Equipamientos",
-    title: "CAR SHOW Equipamientos | Accesorios automotrices en Paraguay",
+    siteName: "RD Equipamientos",
+    title: "RD Equipamientos | Accesorios automotrices en Paraguay",
     description:
-      "ECommerce premium para CAR SHOW Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
+      "ECommerce premium para RD Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "CAR SHOW Equipamientos | Accesorios automotrices en Paraguay",
+    title: "RD Equipamientos | Accesorios automotrices en Paraguay",
     description:
       "Accesorios, equipamientos, promociones y sorteos automotrices en Paraguay.",
   },
@@ -77,7 +77,7 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutoPartsStore",
-    name: "CAR SHOW Equipamientos",
+    name: "RD Equipamientos",
     description:
       "Accesorios, equipamientos, promociones y soluciones automotrices en Paraguay.",
     url: "https://autorepuestocompy.vercel.app",
