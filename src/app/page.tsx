@@ -1,601 +1,501 @@
+"use client";
+
+import { ChevronRight, Truck, Shield, MessageCircle, Headphones, Star, Zap, CheckCircle2, ArrowRight, Phone, MapPin, Heart, Eye, Plus, ShoppingCart } from "lucide-react";
+import { useCart } from "@/components/CartProvider";
+import Header from "@/components/Header";
+
+const topBarItems = [
+  { icon: Truck, text: "Envíos a todo Paraguay" },
+  { icon: Shield, text: "Garantía en todos los productos" },
+  { icon: MessageCircle, text: "Atención por WhatsApp" },
+  { icon: Headphones, text: "Asesoría técnica gratuita" },
+];
+
 const navigation = [
-  { label: "Inicio", href: "/" },
-  { label: "Productos", href: "/productos" },
-  { label: "Promociones", href: "/promociones" },
-  { label: "Sorteos", href: "https://sorteocarshow.com.py/" },
-  { label: "Nosotros", href: "/nosotros" },
-  { label: "Contacto", href: "/contacto" },
+  { name: "Inicio", href: "/" },
+  { name: "Productos", href: "/productos" },
+  { name: "Promociones", href: "/promociones" },
+  { name: "Sorteos", href: "https://sorteocarshow.com.py/" },
+  { name: "Nosotros", href: "/nosotros" },
+  { name: "Contacto", href: "/contacto" },
 ];
 
-const quickLinks = [
-  { label: "Categorías", href: "#categorias" },
-  { label: "Destacados", href: "#productos" },
-  { label: "Más vendidos", href: "#mas-vendidos" },
-  { label: "Promos", href: "#promociones" },
-  { label: "Combos", href: "#combos" },
-];
-
-const trustBadges = [
-  "Envíos a todo Paraguay",
-  "Equipamientos originales y seleccionados",
-  "Atención por WhatsApp",
-];
-
+// Categorías con imágenes reales de Unsplash
 const categories = [
-  "Audio y multimedia",
-  "Luces y faros",
-  "Accesorios exteriores",
-  "Accesorios interiores",
-  "Seguridad",
-  "Herramientas y mantenimiento",
+  { name: "Frenos y Discos", image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=300&fit=crop", count: "42 productos", href: "/categoria/frenos" },
+  { name: "Suspensión", image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&h=300&fit=crop", count: "28 productos", href: "/categoria/suspension" },
+  { name: "Llantas y Neumáticos", image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=300&fit=crop", count: "56 productos", href: "/categoria/llantas" },
+  { name: "Faros y Luces", image: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=400&h=300&fit=crop", count: "35 productos", href: "/categoria/faros" },
+  { name: "Audio y Multimedia", image: "https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=300&fit=crop", count: "24 productos", href: "/categoria/audio" },
+  { name: "Volantes y Interiores", image: "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?w=400&h=300&fit=crop", count: "19 productos", href: "/categoria/interiores" },
 ];
 
-type ProductBadge = "Nuevo" | "Promo" | "Más vendido";
-
-type Product = {
-  name: string;
-  price: string;
-  category: string;
-  badge: ProductBadge;
-};
-
-const products: Product[] = [
+// Productos reales de ejemplo con imágenes reales
+const featuredProducts = [
   {
-    name: "Kit LED H4 Alta/Baja",
-    price: "Gs. 185.000",
-    category: "Luces y faros",
-    badge: "Nuevo",
-  },
-  {
-    name: "Cámara de retroceso HD",
-    price: "Gs. 240.000",
-    category: "Seguridad",
+    name: "Disco de Freno Brembo Ventilado 320mm",
+    price: "Gs. 890.000",
+    oldPrice: "Gs. 1.150.000",
+    category: "Frenos",
     badge: "Más vendido",
+    badgeColor: "bg-red-600",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=400&fit=crop",
+    sku: "BREM-320-VEN",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Disco de Freno Brembo Ventilado 320mm",
   },
   {
-    name: "Radio multimedia Android",
-    price: "Gs. 1.450.000",
-    category: "Audio y multimedia",
+    name: "Amortiguador KYB Excel-G Delantero",
+    price: "Gs. 420.000",
+    oldPrice: "Gs. 520.000",
+    category: "Suspensión",
     badge: "Promo",
+    badgeColor: "bg-red-600",
+    image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&h=400&fit=crop",
+    sku: "KYB-EXG-DEL",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Amortiguador KYB Excel-G Delantero",
   },
   {
-    name: "Alfombra universal premium",
-    price: "Gs. 160.000",
-    category: "Accesorios interiores",
+    name: "Llanta Aleación 17 pulgadas Sport Racing",
+    price: "Gs. 1.850.000",
+    category: "Llantas",
     badge: "Nuevo",
+    badgeColor: "bg-slate-800",
+    image: "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop",
+    sku: "LLA-17-SPR",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Llanta Aleación 17 Sport Racing",
   },
   {
-    name: "Sensor de estacionamiento",
-    price: "Gs. 320.000",
-    category: "Seguridad",
-    badge: "Más vendido",
-  },
-  {
-    name: "Barra LED auxiliar",
-    price: "Gs. 390.000",
-    category: "Accesorios exteriores",
+    name: "Farola LED OSRAM Night Breaker H4",
+    price: "Gs. 285.000",
+    oldPrice: "Gs. 350.000",
+    category: "Iluminación",
     badge: "Promo",
+    badgeColor: "bg-red-600",
+    image: "https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=400&h=400&fit=crop",
+    sku: "OSR-NB-H4",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Farola LED OSRAM Night Breaker H4",
   },
-];
-
-const topSellers: Product[] = [
   {
-    name: "Kit LED H4 Alta/Baja",
-    price: "Gs. 185.000",
-    category: "Luces y faros",
+    name: "Kit de Embrague Valeo Premium",
+    price: "Gs. 1.250.000",
+    oldPrice: "Gs. 1.480.000",
+    category: "Transmisión",
     badge: "Más vendido",
+    badgeColor: "bg-red-600",
+    image: "https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=400&h=400&fit=crop",
+    sku: "VAL-EMB-PRE",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Kit de Embrague Valeo Premium",
   },
   {
-    name: "Radio multimedia Android",
-    price: "Gs. 1.450.000",
-    category: "Audio y multimedia",
-    badge: "Más vendido",
+    name: "Batería Moura 60Ah Free Maintenance",
+    price: "Gs. 680.000",
+    category: "Eléctrico",
+    badge: "Nuevo",
+    badgeColor: "bg-slate-800",
+    image: "https://images.unsplash.com/photo-1616423664074-907f88512b91?w=400&h=400&fit=crop",
+    sku: "MOUR-60-FM",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Batería Moura 60Ah Free Maintenance",
   },
   {
-    name: "Cámara de retroceso HD",
-    price: "Gs. 240.000",
-    category: "Seguridad",
-    badge: "Más vendido",
-  },
-  {
-    name: "Sensor de estacionamiento",
+    name: "Pastillas de Freno TRW Cerámica",
     price: "Gs. 320.000",
-    category: "Seguridad",
-    badge: "Más vendido",
+    oldPrice: "Gs. 395.000",
+    category: "Frenos",
+    badge: "Promo",
+    badgeColor: "bg-red-600",
+    image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=400&fit=crop",
+    sku: "TRW-PAS-CER",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Pastillas de Freno TRW Cerámica",
   },
   {
-    name: "Alfombra universal premium",
-    price: "Gs. 160.000",
-    category: "Accesorios interiores",
+    name: "Neumático Michelin Primacy 4 205/55 R16",
+    price: "Gs. 1.450.000",
+    category: "Neumáticos",
     badge: "Más vendido",
-  },
-  {
-    name: "Barra LED auxiliar",
-    price: "Gs. 390.000",
-    category: "Accesorios exteriores",
-    badge: "Más vendido",
+    badgeColor: "bg-red-600",
+    image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=400&h=400&fit=crop",
+    sku: "MIC-PR4-205",
+    whatsappText: "Hola RD AUTOREPUESTO, consulto por Neumático Michelin Primacy 4",
   },
 ];
 
-const promos = [
+// Flash Deals
+const flashDeals = [
   {
-    title: "Promo multimedia",
-    detail: "Hasta 20% OFF en radios Android y kits de instalación.",
+    name: "Kit Frenos Completo Brembo",
+    price: "Gs. 2.100.000",
+    oldPrice: "Gs. 2.650.000",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=300&h=300&fit=crop",
+    endsIn: "2 días",
+    sold: 78,
+    total: 100,
   },
   {
-    title: "Semana de iluminación",
-    detail: "2x1 en lámparas seleccionadas y descuentos en barras LED.",
+    name: "Suspensión Deportiva Eibach",
+    price: "Gs. 3.200.000",
+    oldPrice: "Gs. 3.900.000",
+    image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=300&h=300&fit=crop",
+    endsIn: "5 días",
+    sold: 45,
+    total: 80,
   },
-  {
-    title: "Accesorios interiores",
-    detail: "Financiá en cuotas con beneficios exclusivos en combos premium.",
-  },
+];
+
+// Best sellers adicionales
+const bestSellers = [
+  { name: "Filtro de Aire Mann-Filter", price: "Gs. 95.000", image: "https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=300&h=300&fit=crop" },
+  { name: "Bujía NGK Iridium IX", price: "Gs. 65.000", image: "https://images.unsplash.com/photo-1616423664074-907f88512b91?w=300&h=300&fit=crop" },
+  { name: "Aceite Castrol EDGE 5W30", price: "Gs. 180.000", image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=300&h=300&fit=crop" },
+  { name: "Alternador Bosch 90A", price: "Gs. 1.100.000", image: "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=300&h=300&fit=crop" },
 ];
 
 const combos = [
   {
-    name: "Combo iluminación",
-    detail: "Kit LED + barra auxiliar + instalación recomendada.",
-    price: "Desde Gs. 520.000",
+    name: "Kit Frenado Premium",
+    items: ["Disco Brembo ventilado", "Pastillas TRW cerámica", "Líquido de freno DOT4"],
+    price: "Gs. 1.450.000",
+    oldPrice: "Gs. 1.780.000",
+    savings: "Ahorrás Gs. 330.000",
+    image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=250&fit=crop",
   },
   {
-    name: "Combo seguridad",
-    detail: "Cámara HD + sensores + asesoría para montaje.",
-    price: "Desde Gs. 690.000",
-  },
-  {
-    name: "Combo interior premium",
-    detail: "Alfombras + organizadores + detalles de confort.",
-    price: "Desde Gs. 450.000",
+    name: "Kit Suspensión Completo",
+    items: ["Amortiguadores KYB", "Espirales Eibach", "Bujes de suspensión"],
+    price: "Gs. 2.800.000",
+    oldPrice: "Gs. 3.450.000",
+    savings: "Ahorrás Gs. 650.000",
+    image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&h=250&fit=crop",
   },
 ];
 
-const confidence = [
-  "Compra asesorada",
-  "Atención rápida",
-  "Productos seleccionados",
-  "Instalación o recomendación técnica según disponibilidad",
+const trustFeatures = [
+  { icon: Truck, title: "Envíos a todo Paraguay", desc: "Llegamos a cualquier ciudad del país" },
+  { icon: Shield, title: "Garantía real", desc: "Todos los productos con garantía del fabricante" },
+  { icon: Headphones, title: "Asesoría técnica", desc: "Te ayudamos a elegir el repuesto correcto" },
+  { icon: Zap, title: "Atención rápida", desc: "Respuesta en minutos por WhatsApp" },
 ];
 
-const badgeStyles: Record<ProductBadge, string> = {
-  Nuevo: "bg-white/10 text-white",
-  Promo: "bg-[#E10600]/20 text-[#ff776f] border border-[#E10600]/40",
-  "Más vendido":
-    "bg-emerald-500/20 text-emerald-300 border border-emerald-400/40",
-};
-
-const carouselBase =
-  "flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden";
+const brands = ["Brembo", "Bosch", "Michelin", "KYB", "Valeo", "NGK", "Castrol", "Mann-Filter", "TRW", "OSRAM"];
 
 const whatsappNumber = "595981000000";
-
-function createWhatsAppUrl(message: string) {
-  return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-}
-
-function createProductMessage(product: Product) {
-  return `Hola CAR SHOW, quiero consultar por el producto: ${product.name} - Precio: ${product.price}`;
-}
+const whatsappUrl = (text: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
 export default function Home() {
+  const { addItem } = useCart();
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-white">
-      <header className="sticky top-0 z-30 border-b border-white/10 bg-[#0A0A0A]/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
-          <a href="/" className="block">
-            <p className="text-[10px] font-medium uppercase tracking-[0.2em] text-[#E10600] sm:text-xs">
-              Paraguay
-            </p>
-            <p className="text-lg font-black tracking-[0.18em] sm:text-xl">
-              CAR SHOW
-            </p>
-          </a>
+    <div className="min-h-screen bg-white text-slate-900">
+      <Header />
 
-          <nav className="hidden items-center gap-5 text-sm text-zinc-200 lg:flex">
-            {navigation.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                className="transition hover:text-white"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <a
-            href={createWhatsAppUrl("Hola CAR SHOW, quiero hacer una consulta.")}
-            target="_blank"
-            rel="noreferrer"
-            className="inline-flex min-h-11 items-center rounded-full bg-[#E10600] px-4 text-sm font-semibold transition hover:bg-[#b60500]"
-          >
-            WhatsApp
-          </a>
-        </div>
-
-        <div className="border-t border-white/10 lg:hidden">
-          <div className={`${carouselBase} px-4 py-2 sm:px-6`}>
-            {quickLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="snap-start shrink-0 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-semibold text-zinc-200"
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-        </div>
-      </header>
-
-      <main className="mx-auto flex w-full max-w-7xl flex-col gap-6 px-4 py-4 sm:gap-8 sm:px-6 sm:py-7 lg:gap-12 lg:px-8 lg:py-12">
-        <section className="grid gap-4 rounded-2xl border border-white/10 bg-gradient-to-br from-zinc-900 to-black p-4 sm:p-6 lg:grid-cols-[1.2fr_0.8fr] lg:p-10">
-          <div className="space-y-4 sm:space-y-5">
-            <p className="inline-flex rounded-full border border-[#E10600]/40 bg-[#E10600]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-widest text-[#ff8b87] sm:text-xs">
-              Equipamientos automotrices premium
-            </p>
-
-            <h1 className="text-2xl font-black uppercase leading-tight sm:text-3xl lg:text-5xl">
-              Potenciá tu vehículo con accesorios de alto rendimiento
-            </h1>
-
-            <p className="max-w-2xl text-sm text-zinc-300 sm:text-base">
-              En CAR SHOW Equipamientos encontrás productos confiables, asesoría
-              real y promociones para que tu auto luzca y funcione al máximo.
-            </p>
-
-            <div className="flex flex-col gap-2.5 sm:flex-row sm:gap-3">
-              <a
-                href="#productos"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[#E10600] px-5 text-center text-sm font-semibold transition hover:bg-[#b60500]"
-              >
-                Ver productos
-              </a>
-
-              <a
-                href={createWhatsAppUrl(
-                  "Hola CAR SHOW, quiero consultar por equipamientos automotrices."
-                )}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-white/20 px-5 text-center text-sm font-semibold transition hover:border-[#E10600] hover:text-[#ff8b87]"
-              >
-                Consultar por WhatsApp
-              </a>
+      <main>
+        {/* HERO - Estilo AutoDaily con producto grande */}
+        <section className="relative overflow-hidden bg-gradient-to-r from-slate-100 to-slate-200">
+          <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-8 px-4 py-12 sm:px-6 lg:flex-row lg:px-8 lg:py-16">
+            <div className="flex-1 space-y-5 text-center lg:text-left">
+              <div className="inline-flex items-center gap-2 rounded-full border border-red-200 bg-red-50 px-4 py-1.5">
+                <Zap className="h-3.5 w-3.5 text-red-600" />
+                <span className="text-xs font-bold uppercase tracking-wider text-red-600">Oferta de la semana</span>
+              </div>
+              <h1 className="text-4xl font-black uppercase leading-tight text-slate-900 sm:text-5xl lg:text-6xl">
+                Sistema de Frenado Brembo
+              </h1>
+              <p className="mx-auto max-w-lg text-lg text-slate-600 lg:mx-0">
+                Discos ventilados de alto rendimiento. Máxima seguridad y durabilidad para tu vehículo. Stock disponible.
+              </p>
+              <div className="flex items-baseline justify-center gap-3 lg:justify-start">
+                <span className="text-3xl font-extrabold text-red-600">Gs. 890.000</span>
+                <span className="text-xl text-slate-400 line-through">Gs. 1.150.000</span>
+              </div>
+              <div className="flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
+                <a href="#productos" className="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-8 py-3.5 text-sm font-bold text-white transition hover:bg-red-700">
+                  <ShoppingCart className="h-4 w-4" />Ver productos
+                </a>
+                <a href={whatsappUrl("Hola RD AUTOREPUESTO, me interesa el Sistema de Frenado Brembo")} target="_blank" rel="noreferrer" className="inline-flex items-center justify-center gap-2 rounded-xl border-2 border-slate-900 bg-white px-8 py-3.5 text-sm font-bold text-slate-900 transition hover:bg-slate-900 hover:text-white">
+                  <MessageCircle className="h-4 w-4" />Consultar ahora
+                </a>
+              </div>
+            </div>
+            <div className="relative flex shrink-0 items-center justify-center lg:w-1/2">
+              <div className="absolute -inset-8 rounded-full bg-red-100/50 blur-3xl" />
+              <img src="https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=600&h=500&fit=crop" alt="Disco de freno Brembo" className="relative z-10 w-full max-w-md rounded-2xl object-cover shadow-2xl" />
             </div>
           </div>
+        </section>
 
-          <div className="grid gap-2.5 sm:grid-cols-3 lg:grid-cols-1">
-            {trustBadges.map((badge) => (
-              <article
-                key={badge}
-                className="rounded-xl border border-white/10 bg-white/5 p-3 text-sm font-medium text-zinc-100 sm:p-4"
-              >
-                {badge}
-              </article>
+        {/* MARCAS */}
+        <section className="border-y border-slate-100 bg-white py-6">
+          <div className="mx-auto flex w-full max-w-7xl flex-wrap items-center justify-center gap-8 px-4 sm:px-6 lg:px-8">
+            {brands.map((brand) => (
+              <span key={brand} className="text-sm font-bold uppercase tracking-wider text-slate-400 transition hover:text-slate-700">{brand}</span>
             ))}
           </div>
         </section>
 
-        <section id="categorias" className="space-y-3">
-          <h2 className="text-xl font-bold sm:text-2xl">
-            Categorías destacadas
-          </h2>
-
-          <div
-            className={`${carouselBase} md:grid md:grid-cols-3 md:gap-3 md:overflow-visible md:pb-0`}
-          >
-            {categories.map((category) => (
-              <article
-                key={category}
-                className="snap-start shrink-0 w-[82%] rounded-xl border border-white/10 bg-zinc-900 p-4 transition hover:border-[#E10600]/60 sm:w-[45%] md:w-auto"
-              >
-                <p className="text-xs text-zinc-400">Categoría</p>
-                <h3 className="mt-1.5 text-base font-semibold">{category}</h3>
-              </article>
-            ))}
+        {/* CATEGORÍAS CON IMÁGENES REALES */}
+        <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="mb-8 flex items-end justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Comprá por categoría</h2>
+              <p className="mt-2 text-slate-500">Encontrá el repuesto exacto para tu vehículo</p>
+            </div>
+            <a href="/productos" className="hidden items-center gap-1 text-sm font-semibold text-red-600 transition hover:text-red-700 sm:flex">Ver todo <ChevronRight className="h-4 w-4" /></a>
           </div>
-        </section>
-
-        <section id="productos" className="space-y-3">
-          <div className="flex items-end justify-between gap-3">
-            <h2 className="text-xl font-bold sm:text-2xl">
-              Productos destacados
-            </h2>
-
-            <a
-              href="/productos"
-              className="text-xs text-[#ff8b87] hover:text-[#E10600] sm:text-sm"
-            >
-              Ver catálogo completo
-            </a>
-          </div>
-
-          <div
-            className={`${carouselBase} md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0`}
-          >
-            {products.map((product) => (
-              <article
-                key={product.name}
-                className="snap-start shrink-0 w-[84%] rounded-2xl border border-white/10 bg-zinc-900 p-4 sm:w-[48%] md:w-auto md:p-5"
-              >
-                <div className="h-28 rounded-xl bg-gradient-to-br from-zinc-800 to-zinc-950 sm:h-32" />
-
-                <div className="mt-3 space-y-1.5">
-                  <p className="text-[11px] uppercase tracking-widest text-zinc-400 sm:text-xs">
-                    {product.category}
-                  </p>
-
-                  <h3 className="text-base font-semibold sm:text-lg">
-                    {product.name}
-                  </h3>
-
-                  <p className="text-lg font-extrabold text-white sm:text-xl">
-                    {product.price}
-                  </p>
-
-                  <span
-                    className={`inline-flex rounded-full px-3 py-1 text-xs font-semibold ${badgeStyles[product.badge]}`}
-                  >
-                    {product.badge}
-                  </span>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {categories.map((cat) => (
+              <a key={cat.name} href={cat.href} className="group relative overflow-hidden rounded-2xl border border-slate-200 transition hover:border-red-200 hover:shadow-xl">
+                <div className="aspect-[16/10] overflow-hidden">
+                  <img src={cat.image} alt={cat.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                 </div>
-
-                <a
-                  href={createWhatsAppUrl(createProductMessage(product))}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-[#E10600]/60 px-4 text-sm font-semibold text-[#ff8b87] transition hover:bg-[#E10600] hover:text-white"
-                >
-                  Consultar
-                </a>
-              </article>
+                <div className="absolute bottom-0 left-0 right-0 p-5">
+                  <h3 className="text-lg font-bold text-white">{cat.name}</h3>
+                  <p className="text-sm text-white/80">{cat.count}</p>
+                </div>
+              </a>
             ))}
           </div>
         </section>
 
-        <section id="mas-vendidos" className="space-y-3">
-          <div className="flex items-end justify-between gap-3">
-            <h2 className="text-xl font-bold sm:text-2xl">Más vendidos</h2>
-            <span className="text-xs text-zinc-400 sm:text-sm">
-              Top consultados
-            </span>
+        {/* PRODUCTOS DESTACADOS - Grid tipo tienda real */}
+        <section id="productos" className="bg-slate-50">
+          <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div className="mb-8 flex items-end justify-between">
+              <div>
+                <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Productos destacados</h2>
+                <p className="mt-2 text-slate-500">Los más elegidos por nuestros clientes</p>
+              </div>
+              <a href="/productos" className="hidden items-center gap-1 text-sm font-semibold text-red-600 transition hover:text-red-700 sm:flex">Ver catálogo <ChevronRight className="h-4 w-4" /></a>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {featuredProducts.map((product) => (
+                <article key={product.name} className="group relative flex flex-col overflow-hidden rounded-xl border border-slate-200 bg-white transition hover:border-red-200 hover:shadow-xl">
+                  <div className="relative aspect-square overflow-hidden bg-white">
+                    <img src={product.image} alt={product.name} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
+                    <span className={`absolute left-3 top-3 rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white ${product.badgeColor}`}>{product.badge}</span>
+                    {product.oldPrice && (
+                      <span className="absolute right-3 top-3 rounded-full bg-red-600 px-2 py-1 text-[11px] font-bold text-white">
+                        -{Math.round((parseInt(product.oldPrice.replace(/[^0-9]/g, "")) - parseInt(product.price.replace(/[^0-9]/g, ""))) / parseInt(product.oldPrice.replace(/[^0-9]/g, "")) * 100)}%
+                      </span>
+                    )}
+                    <div className="absolute inset-0 flex items-center justify-center gap-2 opacity-0 transition group-hover:opacity-100">
+                      <button className="rounded-full bg-white p-2.5 text-slate-700 shadow-lg transition hover:bg-red-600 hover:text-white"><Eye className="h-4 w-4" /></button>
+                      <button className="rounded-full bg-white p-2.5 text-slate-700 shadow-lg transition hover:bg-red-600 hover:text-white"><Heart className="h-4 w-4" /></button>
+                    </div>
+                  </div>
+                  <div className="flex flex-1 flex-col p-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-wider text-slate-400">{product.category} · {product.sku}</p>
+                    <h3 className="mt-1 text-sm font-bold text-slate-900 group-hover:text-red-600 transition line-clamp-2">{product.name}</h3>
+                    <div className="mt-2 flex items-baseline gap-2">
+                      <span className="text-lg font-extrabold text-slate-900">{product.price}</span>
+                      {product.oldPrice && <span className="text-xs text-slate-400 line-through">{product.oldPrice}</span>}
+                    </div>
+                    <div className="mt-auto flex flex-col gap-2">
+                      <button 
+                        onClick={() => addItem({
+                          id: product.sku,
+                          name: product.name,
+                          price: parseInt(product.price.replace(/[^0-9]/g, "")),
+                          oldPrice: product.oldPrice ? parseInt(product.oldPrice.replace(/[^0-9]/g, "")) : undefined,
+                          image: product.image,
+                          sku: product.sku,
+                          category: product.category,
+                        })}
+                        className="flex items-center justify-center gap-2 rounded-lg bg-red-600 py-2.5 text-xs font-bold text-white transition hover:bg-red-700"
+                      >
+                        <Plus className="h-3.5 w-3.5" />Agregar al carrito
+                      </button>
+                      <a href={whatsappUrl(product.whatsappText)} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 py-2 text-xs font-bold text-red-600 transition hover:bg-red-100">
+                        <MessageCircle className="h-3 w-3" />Consultar
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
           </div>
+        </section>
 
-          <div
-            className={`${carouselBase} lg:grid lg:grid-cols-4 lg:gap-4 lg:overflow-visible lg:pb-0`}
-          >
-            {topSellers.map((product) => (
-              <article
-                key={`top-${product.name}`}
-                className="snap-start shrink-0 w-[82%] rounded-xl border border-white/10 bg-black/40 p-4 sm:w-[45%] lg:w-auto"
-              >
-                <p className="text-[11px] uppercase tracking-widest text-zinc-400">
-                  {product.category}
-                </p>
-
-                <h3 className="mt-1.5 text-base font-semibold">
-                  {product.name}
-                </h3>
-
-                <p className="mt-2 text-lg font-extrabold text-[#ff8b87]">
-                  {product.price}
-                </p>
-
-                <a
-                  href={createWhatsAppUrl(createProductMessage(product))}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex min-h-11 w-full items-center justify-center rounded-lg border border-white/20 text-sm font-semibold text-zinc-100 transition hover:border-[#E10600] hover:text-[#ff8b87]"
-                >
-                  Consultar ahora
-                </a>
-              </article>
+        {/* FLASH DEALS */}
+        <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="mb-8 flex items-center gap-3">
+            <div className="rounded-lg bg-red-600 px-3 py-1.5">
+              <span className="text-xs font-bold uppercase tracking-wider text-white">⚡ Flash Deals</span>
+            </div>
+            <p className="text-sm text-slate-500">Ofertas por tiempo limitado. ¡Apurate!</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
+            {flashDeals.map((deal) => (
+              <div key={deal.name} className="flex gap-4 rounded-2xl border border-red-200 bg-gradient-to-r from-red-50 to-white p-5 transition hover:shadow-lg">
+                <img src={deal.image} alt={deal.name} className="h-28 w-28 shrink-0 rounded-xl object-cover" />
+                <div className="flex flex-1 flex-col">
+                  <h3 className="font-bold text-slate-900">{deal.name}</h3>
+                  <div className="mt-1 flex items-baseline gap-2">
+                    <span className="text-xl font-extrabold text-red-600">{deal.price}</span>
+                    <span className="text-sm text-slate-400 line-through">{deal.oldPrice}</span>
+                  </div>
+                  <p className="mt-1 text-xs text-slate-500">Termina en: <span className="font-bold text-red-600">{deal.endsIn}</span></p>
+                  <div className="mt-2">
+                    <div className="h-2 w-full rounded-full bg-slate-200">
+                      <div className="h-2 rounded-full bg-red-600 transition-all" style={{ width: `${(deal.sold / deal.total) * 100}%` }} />
+                    </div>
+                    <p className="mt-1 text-[11px] text-slate-500">Vendidos {deal.sold} de {deal.total}</p>
+                  </div>
+                  <a href={whatsappUrl(`Hola RD AUTOREPUESTO, me interesa ${deal.name}`)} target="_blank" rel="noreferrer" className="mt-auto inline-flex w-fit items-center gap-1 rounded-lg bg-red-600 px-4 py-2 text-xs font-bold text-white transition hover:bg-red-700">
+                    <MessageCircle className="h-3.5 w-3.5" />Consultar
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         </section>
 
-        <section
-          id="promociones"
-          className="space-y-3 rounded-2xl border border-[#E10600]/40 bg-[#1a0b0a] p-4 sm:p-6 lg:p-8"
-        >
-          <h2 className="text-xl font-bold sm:text-2xl">
-            Promociones destacadas
-          </h2>
-
-          <div
-            className={`${carouselBase} md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0`}
-          >
-            {promos.map((promo) => (
-              <article
-                key={promo.title}
-                className="snap-start shrink-0 w-[84%] rounded-xl border border-[#E10600]/40 bg-black/40 p-4 sm:w-[48%] md:w-auto md:p-5"
-              >
-                <p className="text-[11px] font-semibold uppercase tracking-widest text-[#ff8b87] sm:text-xs">
-                  Oferta limitada
-                </p>
-
-                <h3 className="mt-1.5 text-base font-bold sm:text-lg">
-                  {promo.title}
-                </h3>
-
-                <p className="mt-2 text-sm text-zinc-300">{promo.detail}</p>
-              </article>
-            ))}
+        {/* MÁS VENDIDOS - Horizontal scroll */}
+        <section className="bg-slate-900 text-white">
+          <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold sm:text-3xl">Los más vendidos</h2>
+              <p className="mt-2 text-slate-400">Productos que nuestros clientes eligen una y otra vez</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {bestSellers.map((item) => (
+                <div key={item.name} className="group rounded-xl border border-slate-700 bg-slate-800/50 p-4 transition hover:border-red-500/50">
+                  <div className="aspect-square overflow-hidden rounded-lg bg-white">
+                    <img src={item.image} alt={item.name} className="h-full w-full object-cover transition group-hover:scale-105" />
+                  </div>
+                  <h3 className="mt-3 text-sm font-bold">{item.name}</h3>
+                  <p className="mt-1 text-lg font-extrabold text-red-400">{item.price}</p>
+                  <a href={whatsappUrl(`Hola RD AUTOREPUESTO, consulto por ${item.name}`)} target="_blank" rel="noreferrer" className="mt-2 flex items-center justify-center gap-1 rounded-lg border border-red-500/50 bg-red-500/10 py-2 text-xs font-bold text-red-400 transition hover:bg-red-500 hover:text-white">
+                    <MessageCircle className="h-3 w-3" />Consultar
+                  </a>
+                </div>
+              ))}
+            </div>
           </div>
-
-          <a
-            href="/promociones"
-            className="inline-flex min-h-11 items-center rounded-lg bg-[#E10600] px-5 text-sm font-semibold transition hover:bg-[#b60500]"
-          >
-            Ver promociones
-          </a>
         </section>
 
-        <section
-          id="sorteos"
-          className="rounded-2xl border border-[#FFD700]/40 bg-[#1a1703] p-4 sm:p-6 lg:p-8"
-        >
-          <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#FFD700] sm:text-sm">
-            Sorteos CAR SHOW
-          </p>
-
-          <h2 className="mt-2 text-xl font-bold text-[#fff1b8] sm:text-2xl lg:text-3xl">
-            Participá por equipamientos premium y experiencias exclusivas
-          </h2>
-
-          <p className="mt-2.5 max-w-3xl text-sm text-[#f3dea0] sm:text-base">
-            Integramos la energía de sorteocarshow.com.py para impulsar campañas
-            de alto impacto con premios reales para nuestra comunidad.
-          </p>
-
-          <a
-            href="https://sorteocarshow.com.py/"
-            target="_blank"
-            rel="noreferrer"
-            className="mt-4 inline-flex min-h-11 items-center rounded-lg bg-[#FFD700] px-5 text-sm font-bold text-black transition hover:bg-[#e0bc00]"
-          >
-            Ver sorteos activos
-          </a>
-        </section>
-
-        <section id="combos" className="space-y-3">
-          <h2 className="text-xl font-bold sm:text-2xl">
-            Combos recomendados
-          </h2>
-
-          <div
-            className={`${carouselBase} md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0`}
-          >
+        {/* COMBOS */}
+        <section className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 sm:text-3xl">Combos recomendados</h2>
+            <p className="mt-2 text-slate-500">Armá tu kit completo y ahorrá</p>
+          </div>
+          <div className="grid gap-6 md:grid-cols-2">
             {combos.map((combo) => (
-              <article
-                key={combo.name}
-                className="snap-start shrink-0 w-[82%] rounded-xl border border-white/10 bg-zinc-900 p-4 sm:w-[45%] md:w-auto md:p-5"
-              >
-                <h3 className="text-base font-bold sm:text-lg">
-                  {combo.name}
-                </h3>
-
-                <p className="mt-1.5 text-sm text-zinc-300">{combo.detail}</p>
-
-                <p className="mt-3 text-base font-extrabold text-[#ff8b87]">
-                  {combo.price}
-                </p>
-              </article>
+              <div key={combo.name} className="flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white sm:flex-row transition hover:border-red-200 hover:shadow-xl">
+                <img src={combo.image} alt={combo.name} className="h-48 w-full object-cover sm:h-auto sm:w-2/5" />
+                <div className="flex flex-1 flex-col p-6">
+                  <h3 className="text-xl font-bold text-slate-900">{combo.name}</h3>
+                  <ul className="mt-3 space-y-1.5">
+                    {combo.items.map((item) => (
+                      <li key={item} className="flex items-center gap-2 text-sm text-slate-600"><CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-500" />{item}</li>
+                    ))}
+                  </ul>
+                  <div className="mt-4 flex items-baseline gap-2">
+                    <span className="text-2xl font-extrabold text-red-600">{combo.price}</span>
+                    <span className="text-sm text-slate-400 line-through">{combo.oldPrice}</span>
+                  </div>
+                  <p className="mt-1 text-xs font-bold text-emerald-600">{combo.savings}</p>
+                  <a href={whatsappUrl(`Hola RD AUTOREPUESTO, me interesa el ${combo.name}`)} target="_blank" rel="noreferrer" className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-red-600 py-2.5 text-sm font-bold text-white transition hover:bg-red-700">
+                    <MessageCircle className="h-4 w-4" />Consultar combo
+                  </a>
+                </div>
+              </div>
             ))}
           </div>
         </section>
 
-        <section className="rounded-2xl border border-white/10 bg-zinc-900 p-4 sm:p-6 lg:p-8">
-          <h2 className="text-xl font-bold sm:text-2xl">
-            ¿Por qué elegir CAR SHOW?
-          </h2>
+        {/* NEWSLETTER */}
+        <section className="relative overflow-hidden">
+          <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1400&h=400&fit=crop" alt="Auto" className="absolute inset-0 h-full w-full object-cover" />
+          <div className="absolute inset-0 bg-slate-900/80" />
+          <div className="relative mx-auto flex w-full max-w-7xl flex-col items-center gap-6 px-4 py-16 text-center sm:px-6 lg:px-8">
+            <h2 className="text-3xl font-bold text-white sm:text-4xl">Enterate de las novedades primero</h2>
+            <p className="max-w-lg text-slate-300">Suscribite y recibí ofertas exclusivas, nuevos productos y descuentos especiales directo en tu WhatsApp.</p>
+            <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row">
+              <input type="text" placeholder="Tu número de WhatsApp" className="flex-1 rounded-lg border border-slate-600 bg-slate-800/80 px-4 py-3 text-sm text-white outline-none placeholder:text-slate-400 focus:border-red-500" />
+              <button className="rounded-lg bg-red-600 px-6 py-3 text-sm font-bold text-white transition hover:bg-red-700">Suscribirme</button>
+            </div>
+          </div>
+        </section>
 
-          <div className="mt-3 grid gap-2.5 sm:mt-4 sm:grid-cols-2 sm:gap-3">
-            {confidence.map((item) => (
-              <article
-                key={item}
-                className="rounded-lg border border-white/10 bg-black/30 p-3 text-sm text-zinc-200 sm:p-4"
-              >
-                {item}
-              </article>
-            ))}
+        {/* CONFIANZA */}
+        <section className="border-t border-slate-200 bg-white">
+          <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {trustFeatures.map((feature) => (
+                <div key={feature.title} className="flex items-center gap-4 rounded-xl border border-slate-100 bg-slate-50 p-5">
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-red-100">
+                    <feature.icon className="h-6 w-6 text-red-600" />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-slate-900">{feature.title}</h3>
+                    <p className="text-sm text-slate-500">{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
       </main>
 
-      <a
-        href={createWhatsAppUrl("Hola CAR SHOW, quiero hacer una consulta.")}
-        target="_blank"
-        rel="noreferrer"
-        className="fixed bottom-4 right-4 z-40 inline-flex min-h-11 items-center rounded-full bg-[#E10600] px-4 text-sm font-bold text-white shadow-lg shadow-black/40 transition hover:bg-[#b60500] lg:hidden"
-      >
-        WhatsApp
-      </a>
-
-      <footer className="border-t border-white/10 bg-black">
-        <div className="mx-auto grid w-full max-w-7xl gap-7 px-4 py-8 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8 lg:py-10">
-          <div>
-            <p className="text-xl font-black tracking-[0.18em]">CAR SHOW</p>
-
-            <p className="mt-2.5 text-sm text-zinc-400">
-              Equipamientos y accesorios automotrices en Paraguay con enfoque
-              comercial, asesoría y confianza.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-300">
-              Links rápidos
-            </h3>
-
-            <ul className="mt-2.5 space-y-2 text-sm text-zinc-400">
-              {navigation.map((item) => (
-                <li key={item.label}>
-                  <a href={item.href} className="transition hover:text-white">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-300">
-              Contacto
-            </h3>
-
-            <ul className="mt-2.5 space-y-2 text-sm text-zinc-400">
-              <li>Asunción, Paraguay</li>
-              <li>+595 981 000 000</li>
-              <li>ventas@carshow.com.py</li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-zinc-300">
-              Redes sociales
-            </h3>
-
-            <ul className="mt-2.5 space-y-2 text-sm text-zinc-400">
-              <li>
-                <a
-                  href="https://instagram.com/carshowpy"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition hover:text-white"
-                >
-                  Instagram @carshowpy
+      {/* FOOTER */}
+      <footer className="bg-slate-900 text-white">
+        <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            <div className="lg:col-span-1">
+              <div className="flex flex-col">
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-red-500">Paraguay</span>
+                <span className="text-2xl font-black tracking-[0.12em]">RD AUTOREPUESTO</span>
+              </div>
+              <p className="mt-4 text-sm leading-relaxed text-slate-400">
+                Repuestos y accesorios automotrices de calidad. Más de 5 años brindando soluciones confiables para tu vehículo en Paraguay.
+              </p>
+              <div className="mt-4 flex gap-3">
+                <a href="https://instagram.com/carshowpy" target="_blank" rel="noreferrer" className="rounded-lg bg-slate-800 p-2.5 text-slate-400 transition hover:bg-red-600 hover:text-white">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                 </a>
-              </li>
-
-              <li>
-                <a
-                  href="https://sorteocarshow.com.py/"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="transition hover:text-white"
-                >
-                  Sorteos activos
+                <a href="#" className="rounded-lg bg-slate-800 p-2.5 text-slate-400 transition hover:bg-red-600 hover:text-white">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
                 </a>
-              </li>
-
-              <li>
-                <a
-                  href={createWhatsAppUrl(
-                    "Hola CAR SHOW, quiero hacer una consulta."
-                  )}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-11 items-center rounded-md bg-[#E10600] px-3 py-2 font-semibold text-white transition hover:bg-[#b60500]"
-                >
-                  WhatsApp
-                </a>
-              </li>
-            </ul>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">Productos</h3>
+              <ul className="mt-4 space-y-2.5">
+                {["Frenos y Discos", "Suspensión", "Llantas y Neumáticos", "Faros y Luces", "Audio y Multimedia", "Motor y Transmisión"].map((item) => (
+                  <li key={item}><a href="#" className="text-sm text-slate-400 transition hover:text-red-400">{item}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">Empresa</h3>
+              <ul className="mt-4 space-y-2.5">
+                {["Sobre nosotros", "Promociones", "Sorteos", "Términos y condiciones", "Política de envíos"].map((item) => (
+                  <li key={item}><a href="#" className="text-sm text-slate-400 transition hover:text-red-400">{item}</a></li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-sm font-bold uppercase tracking-wider text-white">Contacto</h3>
+              <ul className="mt-4 space-y-3">
+                <li className="flex items-start gap-2.5 text-sm text-slate-400"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-red-500" />Asunción, Paraguay</li>
+                <li className="flex items-center gap-2.5 text-sm text-slate-400"><Phone className="h-4 w-4 shrink-0 text-red-500" />+595 981 000 000</li>
+                <li className="flex items-center gap-2.5 text-sm text-slate-400"><MessageCircle className="h-4 w-4 shrink-0 text-red-500" />ventas@rdautorepuesto.com.py</li>
+              </ul>
+              <a href={whatsappUrl("Hola RD AUTOREPUESTO, quiero hacer una consulta")} target="_blank" rel="noreferrer" className="mt-5 inline-flex items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-700">
+                <MessageCircle className="h-4 w-4" />WhatsApp
+              </a>
+            </div>
+          </div>
+          <div className="mt-10 border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
+            © 2024 RD AUTOREPUESTO. Todos los derechos reservados. Paraguay.
           </div>
         </div>
       </footer>
+
+      {/* WhatsApp flotante */}
+      <a href={whatsappUrl("Hola RD AUTOREPUESTO, quiero hacer una consulta")} target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg shadow-green-500/30 transition hover:scale-110 hover:bg-green-600" aria-label="WhatsApp">
+        <MessageCircle className="h-7 w-7" />
+      </a>
     </div>
   );
 }
