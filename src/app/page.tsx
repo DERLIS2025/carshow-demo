@@ -77,7 +77,7 @@ const featuredProducts = [
       "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=400&h=400&fit=crop",
     sku: "BREM-320-VEN",
     whatsappText:
-      "Hola CAR SHOW, consulto por Disco de Freno Brembo Ventilado 320mm",
+      "Hola RD EQUIPAMIENTO, consulto por Disco de Freno Brembo Ventilado 320mm",
   },
   {
     name: "Amortiguador KYB Excel-G Delantero",
@@ -90,7 +90,7 @@ const featuredProducts = [
       "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=400&h=400&fit=crop",
     sku: "KYB-EXG-DEL",
     whatsappText:
-      "Hola CAR SHOW, consulto por Amortiguador KYB Excel-G Delantero",
+      "Hola RD EQUIPAMIENTO, consulto por Amortiguador KYB Excel-G Delantero",
   },
   {
     name: "Llanta Aleación 17 pulgadas Sport Racing",
@@ -102,7 +102,7 @@ const featuredProducts = [
       "https://images.unsplash.com/photo-1558618666-fcd25c85f82e?w=400&h=400&fit=crop",
     sku: "LLA-17-SPR",
     whatsappText:
-      "Hola CAR SHOW, consulto por Llanta Aleación 17 Sport Racing",
+      "Hola RD EQUIPAMIENTO, consulto por Llanta Aleación 17 Sport Racing",
   },
   {
     name: "Farola LED OSRAM Night Breaker H4",
@@ -114,7 +114,7 @@ const featuredProducts = [
     image:
       "https://images.unsplash.com/photo-1542282088-fe8426682b8f?w=400&h=400&fit=crop",
     sku: "OSR-NB-H4",
-    whatsappText: "Hola CAR SHOW, consulto por Farola LED OSRAM Night Breaker H4",
+    whatsappText: "Hola RD EQUIPAMIENTO, consulto por Farola LED OSRAM Night Breaker H4",
   },
   {
     name: "Kit de Embrague Valeo Premium",
@@ -126,7 +126,7 @@ const featuredProducts = [
     image:
       "https://images.unsplash.com/photo-1619405399517-d7fce0f13302?w=400&h=400&fit=crop",
     sku: "VAL-EMB-PRE",
-    whatsappText: "Hola CAR SHOW, consulto por Kit de Embrague Valeo Premium",
+    whatsappText: "Hola RD EQUIPAMIENTO, consulto por Kit de Embrague Valeo Premium",
   },
   {
     name: "Batería Moura 60Ah Free Maintenance",
@@ -138,7 +138,7 @@ const featuredProducts = [
       "https://images.unsplash.com/photo-1616423664074-907f88512b91?w=400&h=400&fit=crop",
     sku: "MOUR-60-FM",
     whatsappText:
-      "Hola CAR SHOW, consulto por Batería Moura 60Ah Free Maintenance",
+      "Hola RD EQUIPAMIENTO, consulto por Batería Moura 60Ah Free Maintenance",
   },
   {
     name: "Pastillas de Freno TRW Cerámica",
@@ -150,7 +150,7 @@ const featuredProducts = [
     image:
       "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=400&h=400&fit=crop",
     sku: "TRW-PAS-CER",
-    whatsappText: "Hola CAR SHOW, consulto por Pastillas de Freno TRW Cerámica",
+    whatsappText: "Hola RD EQUIPAMIENTO, consulto por Pastillas de Freno TRW Cerámica",
   },
   {
     name: "Neumático Michelin Primacy 4 205/55 R16",
@@ -162,7 +162,7 @@ const featuredProducts = [
       "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?w=400&h=400&fit=crop",
     sku: "MIC-PR4-205",
     whatsappText:
-      "Hola CAR SHOW, consulto por Neumático Michelin Primacy 4",
+      "Hola RD EQUIPAMIENTO, consulto por Neumático Michelin Primacy 4",
   },
 ];
 
@@ -335,7 +335,7 @@ export default function Home() {
 
                 <a
                   href={whatsappUrl(
-                    "Hola CAR SHOW, me interesa el Sistema de Frenado Brembo"
+                    "Hola RD EQUIPAMIENTO, me interesa el Sistema de Frenado Brembo"
                   )}
                   target="_blank"
                   rel="noreferrer"
@@ -602,7 +602,7 @@ export default function Home() {
 
                   <a
                     href={whatsappUrl(
-                      `Hola CAR SHOW, me interesa ${deal.name}`
+                      `Hola RD EQUIPAMIENTO, me interesa ${deal.name}`
                     )}
                     target="_blank"
                     rel="noreferrer"
@@ -652,7 +652,7 @@ export default function Home() {
                   </p>
 
                   <a
-                    href={whatsappUrl(`Hola CAR SHOW, consulto por ${item.name}`)}
+                    href={whatsappUrl(`Hola RD EQUIPAMIENTO, consulto por ${item.name}`)}
                     target="_blank"
                     rel="noreferrer"
                     className="mt-2 flex min-h-11 items-center justify-center gap-1 rounded-lg border border-red-500/50 bg-red-500/10 py-2 text-xs font-bold text-red-400 transition hover:bg-red-500 hover:text-white"
@@ -723,7 +723,7 @@ export default function Home() {
 
                   <a
                     href={whatsappUrl(
-                      `Hola CAR SHOW, me interesa el ${combo.name}`
+                      `Hola RD EQUIPAMIENTO, me interesa el ${combo.name}`
                     )}
                     target="_blank"
                     rel="noreferrer"
@@ -808,7 +808,7 @@ export default function Home() {
                   Paraguay
                 </span>
                 <span className="text-2xl font-black tracking-[0.12em]">
-                  CAR SHOW
+                  RD EQUIPAMIENTO
                 </span>
               </div>
 
@@ -823,7 +823,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                   className="rounded-lg bg-slate-800 p-2.5 text-slate-400 transition hover:bg-red-600 hover:text-white"
-                  aria-label="Instagram CAR SHOW"
+                  aria-label="Instagram RD EQUIPAMIENTO"
                 >
                   <svg
                     width="18"
@@ -844,7 +844,7 @@ export default function Home() {
                 <a
                   href="#"
                   className="rounded-lg bg-slate-800 p-2.5 text-slate-400 transition hover:bg-red-600 hover:text-white"
-                  aria-label="Facebook CAR SHOW"
+                  aria-label="Facebook RD EQUIPAMIENTO"
                 >
                   <svg
                     width="18"
@@ -934,7 +934,7 @@ export default function Home() {
               </ul>
 
               <a
-                href={whatsappUrl("Hola CAR SHOW, quiero hacer una consulta")}
+                href={whatsappUrl("Hola RD EQUIPAMIENTO, quiero hacer una consulta")}
                 target="_blank"
                 rel="noreferrer"
                 className="mt-5 inline-flex min-h-11 items-center gap-2 rounded-lg bg-red-600 px-5 py-2.5 text-sm font-bold text-white transition hover:bg-red-700"
@@ -946,14 +946,14 @@ export default function Home() {
           </div>
 
           <div className="mt-10 border-t border-slate-800 pt-6 text-center text-xs text-slate-500">
-            © 2024 CAR SHOW. Todos los derechos reservados. Paraguay.
+            © 2024 RD EQUIPAMIENTO. Todos los derechos reservados. Paraguay.
           </div>
         </div>
       </footer>
 
       {/* WhatsApp flotante */}
       <a
-        href={whatsappUrl("Hola CAR SHOW, quiero hacer una consulta")}
+        href={whatsappUrl("Hola RD EQUIPAMIENTO, quiero hacer una consulta")}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg shadow-green-500/30 transition hover:scale-110 hover:bg-green-600"
