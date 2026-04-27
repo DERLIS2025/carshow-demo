@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronRight, Truck, Shield, MessageCircle, Headphones, Star, Zap, CheckCircle2, ArrowRight, Phone, MapPin, Heart, Eye, Plus } from "lucide-react";
+import { ChevronRight, Truck, Shield, MessageCircle, Headphones, Star, Zap, CheckCircle2, ArrowRight, Phone, MapPin, Heart, Eye, Plus, ShoppingCart } from "lucide-react";
 import { useCart } from "@/components/CartProvider";
 import Header from "@/components/Header";
 
