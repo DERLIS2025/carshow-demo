@@ -50,7 +50,7 @@ const products = [
     whatsappText: "Hola, me interesa la Cámara de retroceso HD",
   },
   {
-    name: "Radio multimedia Android 10\",
+    name: "Radio multimedia Android 10 pulgadas",
     price: "Gs. 1.450.000",
     oldPrice: "Gs. 1.650.000",
     category: "Audio y multimedia",
@@ -58,7 +58,7 @@ const products = [
     badgeColor: "bg-red-600 text-white",
     compatibility: "Varios modelos",
     image: "bg-gradient-to-br from-slate-100 to-slate-200",
-    whatsappText: "Hola, me interesa la Radio multimedia Android",
+    whatsappText: "Hola, me interesa la Radio multimedia Android 10 pulgadas",
   },
   {
     name: "Alfombra universal premium 3D",
