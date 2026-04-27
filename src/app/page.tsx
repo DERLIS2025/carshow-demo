@@ -1,4 +1,8 @@
-import { Search, ShoppingCart, Menu, ChevronRight, Truck, Shield, MessageCircle, Headphones, Star, Zap, Gift, Wrench, Car, Volume2, Lightbulb, Camera, LayoutGrid, Settings, Percent, Ticket, CheckCircle2, ArrowRight, Phone, MapPin, Heart, Eye } from "lucide-react";
+"use client";
+
+import { ChevronRight, Truck, Shield, MessageCircle, Headphones, Star, Zap, CheckCircle2, ArrowRight, Phone, MapPin, Heart, Eye, Plus } from "lucide-react";
+import { useCart } from "@/components/CartProvider";
+import Header from "@/components/Header";
 
 const topBarItems = [
   { icon: Truck, text: "Envíos a todo Paraguay" },
@@ -177,61 +181,10 @@ const whatsappNumber = "595981000000";
 const whatsappUrl = (text: string) => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
 
 export default function Home() {
+  const { addItem } = useCart();
   return (
     <div className="min-h-screen bg-white text-slate-900">
-      {/* TOP BAR */}
-      <div className="bg-slate-900 text-white">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-center gap-6 px-4 py-2 text-xs sm:px-6 lg:px-8">
-          {topBarItems.map((item) => (
-            <div key={item.text} className="hidden items-center gap-1.5 sm:flex">
-              <item.icon className="h-3.5 w-3.5 text-red-500" />
-              <span className="font-medium">{item.text}</span>
-            </div>
-          ))}
-          <div className="flex items-center gap-1.5 sm:hidden">
-            <Truck className="h-3.5 w-3.5 text-red-500" />
-            <span className="font-medium">Envíos · Garantía · WhatsApp · Asesoría</span>
-          </div>
-        </div>
-      </div>
-
-      {/* HEADER */}
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:px-8">
-          <a href="/" className="flex shrink-0 flex-col">
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-red-600">Paraguay</span>
-            <span className="text-xl font-black tracking-[0.12em] text-slate-900">RD AUTOREPUESTO</span>
-          </a>
-
-          <div className="hidden flex-1 max-w-xl lg:block">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-              <input type="text" placeholder="Buscar repuestos, marcas, categorías..." className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 text-sm outline-none transition focus:border-red-300 focus:ring-2 focus:ring-red-100" />
-            </div>
-          </div>
-
-          <nav className="hidden items-center gap-1 xl:flex">
-            {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="rounded-lg px-3 py-2 text-sm font-medium text-slate-600 transition hover:bg-slate-100 hover:text-slate-900">{item.name}</a>
-            ))}
-          </nav>
-
-          <div className="flex items-center gap-2 ml-auto">
-            <button className="rounded-lg p-2 text-slate-600 transition hover:bg-slate-100 lg:hidden"><Search className="h-5 w-5" /></button>
-            <a href={whatsappUrl("Hola RD AUTOREPUESTO, quiero hacer una consulta")} target="_blank" rel="noreferrer" className="hidden items-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-700 sm:flex">
-              <MessageCircle className="h-4 w-4" /><span>WhatsApp</span>
-            </a>
-            <button className="rounded-lg p-2 text-slate-600 transition hover:bg-slate-100 xl:hidden"><Menu className="h-5 w-5" /></button>
-          </div>
-        </div>
-
-        <div className="border-t border-slate-100 px-4 py-2 lg:hidden">
-          <div className="relative">
-            <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-            <input type="text" placeholder="Buscar repuestos..." className="w-full rounded-lg border border-slate-200 bg-slate-50 py-2 pl-10 pr-4 text-sm outline-none" />
-          </div>
-        </div>
-      </header>
+      <Header />
 
       <main>
         {/* HERO - Estilo AutoDaily con producto grande */}
@@ -335,9 +288,25 @@ export default function Home() {
                       <span className="text-lg font-extrabold text-slate-900">{product.price}</span>
                       {product.oldPrice && <span className="text-xs text-slate-400 line-through">{product.oldPrice}</span>}
                     </div>
-                    <a href={whatsappUrl(product.whatsappText)} target="_blank" rel="noreferrer" className="mt-auto flex items-center justify-center gap-2 rounded-lg bg-red-600 py-2.5 text-xs font-bold text-white transition hover:bg-red-700">
-                      <MessageCircle className="h-3.5 w-3.5" />Consultar por WhatsApp
-                    </a>
+                    <div className="mt-auto flex flex-col gap-2">
+                      <button 
+                        onClick={() => addItem({
+                          id: product.sku,
+                          name: product.name,
+                          price: parseInt(product.price.replace(/[^0-9]/g, "")),
+                          oldPrice: product.oldPrice ? parseInt(product.oldPrice.replace(/[^0-9]/g, "")) : undefined,
+                          image: product.image,
+                          sku: product.sku,
+                          category: product.category,
+                        })}
+                        className="flex items-center justify-center gap-2 rounded-lg bg-red-600 py-2.5 text-xs font-bold text-white transition hover:bg-red-700"
+                      >
+                        <Plus className="h-3.5 w-3.5" />Agregar al carrito
+                      </button>
+                      <a href={whatsappUrl(product.whatsappText)} target="_blank" rel="noreferrer" className="flex items-center justify-center gap-2 rounded-lg border border-red-200 bg-red-50 py-2 text-xs font-bold text-red-600 transition hover:bg-red-100">
+                        <MessageCircle className="h-3 w-3" />Consultar
+                      </a>
+                    </div>
                   </div>
                 </article>
               ))}
