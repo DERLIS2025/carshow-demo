@@ -15,8 +15,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "RD Equipamientos | Accesorios automotrices en Paraguay",
-    template: "%s |RD Equipamientos",
+    default: "DD Equipamientos | Accesorios automotrices en Paraguay",
+    template: "%s |DD Equipamientos",
   },
   description:
     "Demo eCommerce premium para RD Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
