@@ -19,10 +19,10 @@ export const metadata: Metadata = {
     template: "%s |DD Equipamientos",
   },
   description:
-    "Demo eCommerce premium para RD Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
+    "Demo eCommerce premium para DD Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
   keywords: [
-    "RD Paraguay",
-    "RD Equipamientos",
+    "DD Paraguay",
+    "DD Equipamientos",
     "accesorios automotrices Paraguay",
     "equipamientos automotrices Paraguay",
     "luces LED para autos",
