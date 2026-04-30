@@ -34,9 +34,9 @@ export const metadata: Metadata = {
     "sorteos RD",
     "tienda automotriz Paraguay",
   ],
-  authors: [{ name: "RD Equipamientos" }],
-  creator: "RD Equipamientos",
-  publisher: "RD Equipamientos",
+  authors: [{ name: "DD Equipamientos" }],
+  creator: "DD Equipamientos",
+  publisher: "DD Equipamientos",
   category: "automotive",
   robots: {
     index: true,
@@ -53,14 +53,14 @@ export const metadata: Metadata = {
     type: "website",
     locale: "es_PY",
     url: "https://autorepuestocompy.vercel.app",
-    siteName: "RD Equipamientos",
-    title: "RD Equipamientos | Accesorios automotrices en Paraguay",
+    siteName: "DD Equipamientos",
+    title: "DD Equipamientos | Accesorios automotrices en Paraguay",
     description:
       "ECommerce premium para RD Equipamientos: accesorios, promociones, sorteos y soluciones automotrices en Paraguay.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "RD Equipamientos | Accesorios automotrices en Paraguay",
+    title: "DD Equipamientos | Accesorios automotrices en Paraguay",
     description:
       "Accesorios, equipamientos, promociones y sorteos automotrices en Paraguay.",
   },
@@ -77,7 +77,7 @@ export default function RootLayout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "AutoPartsStore",
-    name: "RD Equipamientos",
+    name: "DD Equipamientos",
     description:
       "Accesorios, equipamientos, promociones y soluciones automotrices en Paraguay.",
     url: "https://autorepuestocompy.vercel.app",
